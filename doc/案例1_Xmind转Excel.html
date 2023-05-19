@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>&#x6848;&#x4f8b;1&#xff1a;XMind&#x8f6c;Excel&#x6d4b;&#x8bd5;&#x7528;&#x4f8b;</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="案例1xmind转excel测试用例">案例1：XMind转Excel测试用例</h1>
+<h2 id="需求场景">需求场景</h2>
+<blockquote>
+<p>你同事之前都是用XMind来写用例及梳理测试点的，现在组里要求测试完成，测试用例需要都整理到TAPD（腾讯的一个用例及缺陷管理平台）上，TAPD上可以通过Excel批量导入，重写一遍Excel版的用例又非常费力，现在需要你实现一个XMind转Excel测试用例的工具，并制定XMind用例编写规范。</p>
+</blockquote>
+<h2 id="-提示"> 提示</h2>
+<ul>
+<li>
+<p>需要的能力</p>
+<ul>
+<li>Python基础</li>
+<li>列表、字典的遍历、数据提取及组装</li>
+<li>会pip安装，并参考官方文档使用三方包</li>
+</ul>
+</li>
+<li>
+<p>练习重点</p>
+<ul>
+<li>列表、字典数据的提取及组装</li>
+<li>Excel文件的读写</li>
+</ul>
+</li>
+<li>
+<p>难点</p>
+<ul>
+<li>XMind格式规范的设计</li>
+<li>数据缺失及异常处理</li>
+</ul>
+</li>
+<li>
+<p>参考三方包：</p>
+<ul>
+<li>xmind（只兼容XMind8以下版本文件）: <a href="https://pypi.org/project/XMind/">https://pypi.org/project/XMind/</a></li>
+<li>xmindparser: <a href="https://github.com/tobyqin/xmindparser">https://github.com/tobyqin/xmindparser</a></li>
+<li>openpyxl（可以读/写Excel，只兼容.xlsx，不兼容.xls文件）</li>
+</ul>
+</li>
+<li>
+<p>发布</p>
+<ul>
+<li>
+<p>注册一个GitHub或Gitee，使git将源码推送到自己的仓库中去</p>
+</li>
+<li>
+<p>注册一个Pypi，将项目发布到Pypi上</p>
+</li>
+<li>
+<p>项目结构参考</p>
+<ul>
+<li>
+<p><code>xmind2excel</code>  # 项目文件夹</p>
+<ul>
+<li>
+<p><code>xmind2excel</code>  # 包</p>
+<ul>
+<li><code>__init__.py</code>  # 简单逻辑可以直接在这里实现</li>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p><code>requirements.txt</code>  # 三方依赖包列表</p>
+</li>
+<li>
+<p><code>README.md</code>  # 使用说明</p>
+</li>
+<li>
+<p>... 开源协议等</p>
+</li>
+<li>
+<p><code>setup.py</code>  # 安装脚本</p>
+</li>
+<li>
+<p><code>tests</code> # 单元测试目录</p>
+<ul>
+<li><code>__init__.py</code>  </li>
+<li>...  # 单元测试脚本</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>优化建议</p>
+<ul>
+<li>提供命令行接口</li>
+<li>提供一些可自定义的参数或配置，提高灵活性</li>
+<li>Excel标题行加一些漂亮的样式</li>
+<li>使用tk提供操作界面</li>
+<li>使用pyinstaller生成可执行文件</li>
+</ul>
+</li>
+</ul>
+
+        
+        
+    </body>
+    </html>
