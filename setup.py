@@ -30,8 +30,8 @@ setup(
     keywords=[
         'xmind2excel', 'xmind_to_excel',
     ],
-    name='xmind2excel',
-    packages=find_packages(include=['xmind2excel']),
+    name='xmind2excel2',
+    packages=find_packages(include=['xmind2excel2']),
     setup_requires=setup_requirements,
     url='https://github.com/hanzhichao/xmind2excel',  # 项目对应的你的仓库地址
     version=VERSION,

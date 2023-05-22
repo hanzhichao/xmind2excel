@@ -6,13 +6,15 @@
 
 ## 安装方法
 ```shell
-pip install xmind2excel
+pip install xmind2excel2
 ```
 
 ## 使用方法
 
 ```python
+from xmind2excel import xmind2excel
 
+xmind2excel("./testcases.xmind", "./case.xlsx", owner='Kevin')
 
 ```
 
