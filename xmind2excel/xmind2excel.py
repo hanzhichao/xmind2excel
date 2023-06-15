@@ -1,4 +1,3 @@
-
 import openpyxl
 from openpyxl.styles import PatternFill
 from xmindparser import xmind_to_dict
@@ -9,12 +8,50 @@ DEFAULT_TITLE_LINE = (
 
 
 def _load_xmind(xmind_file: str, sheet_index=0) -> dict:
+    """
+    加载xmind指定sheet数据
+    :param xmind_file: xmind文件路径，支持xmind8及xmind zen文件
+    :param sheet_index:
+    :return:
+    """
     data = xmind_to_dict(xmind_file)
     return data[sheet_index]
 
 
-# pprint(data)
-def _parse_testcases(xmind_data: dict, owner=DEFAULT_OWNER)->list:
+def _parse_steps_excepted(testcase: dict):
+    steps = []
+    excepted = []
+
+    for index, step in enumerate(testcase.get('topics', [])):
+        step_sn = index + 1
+        step_title = step['title']
+        if 'topics' in step.keys():
+            step_excepted = ' \n'.join([item['title'] for item in step['topics']])
+            excepted.append(f'{step_sn}. {step_excepted}')
+
+        steps.append(f'{step_sn}. {step_title}')
+    return steps, excepted
+
+
+def _parse_priority(testcase: dict):
+    priority = ''
+    makers = testcase.get('makers')
+    if makers:
+        priority_markers = [item for item in makers if 'priority' in item]
+        if priority_markers:
+            priority = priority_markers[0].replace('priority-', 'p')
+    return priority
+
+
+def _parse_precondition(testcase: dict):
+    precondition = ''
+    note = testcase.get('note')
+    if note:
+        precondition = note  # todo 解析 [预置条件]
+    return precondition
+
+
+def _parse_testcases(xmind_data: dict, owner=DEFAULT_OWNER) -> list:
     """
     解析Xmind用例数据
     :param xmind_data: 由_load_xmind加载得到的XMind数据
@@ -35,40 +72,17 @@ def _parse_testcases(xmind_data: dict, owner=DEFAULT_OWNER)->list:
 
                 for testcase in scenario.get('topics', []):
                     testcase_title = testcase['title']
-                    priority = ''
-                    precondition = ''
-                    owner = owner
-
-                    steps = []
-                    excepted = []
-
-                    note = testcase.get('note')
-                    if note:
-                        precondition = note  # todo 解析 [预置条件]
-
-                    for index, step in enumerate(testcase.get('topics', [])):
-                        step_sn = index + 1
-                        step_title = step['title']
-                        if 'topics' in step.keys():
-                            step_excepted = ' \n'.join([item['title'] for item in step['topics']])
-                            excepted.append(f'{step_sn}. {step_excepted}')
-
-                        steps.append(f'{step_sn}. {step_title}')
-
-                    makers = testcase.get('makers')
-                    print('markers', makers)
-                    if makers:
-                        priority_markers = [item for item in makers if 'priority' in item]
-                        if priority_markers:
-                            priority = priority_markers[0].replace('priority-', 'p')
+                    priority = _parse_priority(testcase)
+                    precondition = _parse_precondition(testcase)
+                    steps, excepted = _parse_steps_excepted(testcase)
 
                     test_steps = ' \n'.join(steps)
                     test_excepted = ' \n'.join(excepted)
+
                     testcase_data = (
                         module_title, feature_title, scenario_title, testcase_title, priority, precondition, test_steps,
                         test_excepted, owner)
                     testcases.append(testcase_data)
-                    print('测试用例', testcase_data)
     return testcases
 
 
@@ -95,7 +109,7 @@ def _write_excel(testcases: list, excel_file: str, title_line: list = DEFAULT_TI
     excel.save(excel_file)
 
 
-def xmind2excel(xmind_file: str, excel_file: str=None, owner: str=None) -> str:
+def xmind2excel(xmind_file: str, excel_file: str = None, owner: str = None) -> str:
     """
     Xmind转Excel
     :param xmind_file: XMind文件路径

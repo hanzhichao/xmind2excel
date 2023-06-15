@@ -1,1 +1,1 @@
-from .main import xmind2excel
+from .xmind2excel import xmind2excel
